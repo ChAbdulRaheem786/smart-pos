@@ -108,14 +108,14 @@ export default function ManageProducts() {
       </div>
 
       {loading ? (
-        <p className="mt-6 text-paper/50">Loading…</p>
+        <p className="mt-6 text-ink-faint">Loading…</p>
       ) : visibleProducts.length === 0 ? (
-        <p className="mt-6 text-paper/50">No products found. Add your first one.</p>
+        <p className="mt-6 text-ink-faint">No products found. Add your first one.</p>
       ) : (
         <div className="mt-6 overflow-x-auto rounded-xl2 border border-admin-border">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-admin-border bg-admin-surface text-left text-paper/50">
+              <tr className="border-b border-admin-border bg-admin-surface text-left text-ink-faint">
                 <th className="px-4 py-3 font-medium">Product</th>
                 <th className="px-4 py-3 font-medium">Category</th>
                 <th className="px-4 py-3 font-medium">Price</th>
@@ -138,11 +138,11 @@ export default function ManageProducts() {
                       </span>
                     )}
                   </td>
-                  <td className="px-4 py-3 text-paper/70">{p.category?.name || "—"}</td>
+                  <td className="px-4 py-3 text-ink-soft">{p.category?.name || "—"}</td>
                   <td className="px-4 py-3 font-mono">{formatPrice(p.discountPrice || p.price)}</td>
-                  <td className="px-4 py-3 text-paper/70">{p.stock}</td>
+                  <td className="px-4 py-3 text-ink-soft">{p.stock}</td>
                   <td className="px-4 py-3">
-                    <span className={`text-xs font-medium ${p.active ? "text-brand" : "text-paper/40"}`}>
+                    <span className={`text-xs font-medium ${p.active ? "text-brand" : "text-ink-faint"}`}>
                       {p.active ? "Active" : "Hidden"}
                     </span>
                   </td>

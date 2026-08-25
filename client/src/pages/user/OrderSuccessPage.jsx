@@ -16,7 +16,7 @@ export default function OrderSuccessPage() {
         Thanks — we've received your order and payment proof. We'll reach out to confirm details shortly.
       </p>
       {orderId && (
-        <p className="mt-3 font-mono text-xs text-ink-soft/60">Reference: {orderId}</p>
+        <p className="mt-3 font-mono text-xs text-ink-faint">Reference: {orderId}</p>
       )}
       <Link to="/" className="btn-primary mt-8 inline-flex">
         Continue shopping

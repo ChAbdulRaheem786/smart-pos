@@ -30,11 +30,11 @@ export default function AdminLogin() {
           <span className="mx-auto flex h-10 w-10 items-center justify-center rounded-md bg-brand text-white font-display font-bold">
             A
           </span>
-          <h1 className="mt-4 font-display text-xl font-semibold text-paper">Admin panel</h1>
-          <p className="mt-1 text-sm text-paper/50">Enter your password to manage the store.</p>
+          <h1 className="mt-4 font-display text-xl font-semibold text-ink">Admin panel</h1>
+          <p className="mt-1 text-sm text-ink-faint">Enter your password to manage the store.</p>
         </div>
 
-        <label className="label-text text-paper/60" htmlFor="password">Password</label>
+        <label className="label-text text-ink-soft" htmlFor="password">Password</label>
         <input
           id="password"
           type="password"

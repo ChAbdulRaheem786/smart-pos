@@ -79,7 +79,7 @@ export default function ProductForm({ product, categories, onSubmit, onCancel, s
 
         <div className="mt-4 grid gap-4 sm:grid-cols-2">
           <div className="sm:col-span-2">
-            <label className="label-text text-paper/60">Product name</label>
+            <label className="label-text text-ink-soft">Product name</label>
             <input
               value={form.name}
               onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
@@ -89,7 +89,7 @@ export default function ProductForm({ product, categories, onSubmit, onCancel, s
           </div>
 
           <div className="sm:col-span-2">
-            <label className="label-text text-paper/60">Description</label>
+            <label className="label-text text-ink-soft">Description</label>
             <textarea
               value={form.description}
               onChange={(e) => setForm((f) => ({ ...f, description: e.target.value }))}
@@ -99,7 +99,7 @@ export default function ProductForm({ product, categories, onSubmit, onCancel, s
           </div>
 
           <div>
-            <label className="label-text text-paper/60">Price</label>
+            <label className="label-text text-ink-soft">Price</label>
             <input
               type="number"
               min="0"
@@ -109,7 +109,7 @@ export default function ProductForm({ product, categories, onSubmit, onCancel, s
             />
           </div>
           <div>
-            <label className="label-text text-paper/60">Discount price (optional)</label>
+            <label className="label-text text-ink-soft">Discount price (optional)</label>
             <input
               type="number"
               min="0"
@@ -120,7 +120,7 @@ export default function ProductForm({ product, categories, onSubmit, onCancel, s
           </div>
 
           <div>
-            <label className="label-text text-paper/60">Category</label>
+            <label className="label-text text-ink-soft">Category</label>
             <select
               value={form.category}
               onChange={(e) => setForm((f) => ({ ...f, category: e.target.value }))}
@@ -133,7 +133,7 @@ export default function ProductForm({ product, categories, onSubmit, onCancel, s
             </select>
           </div>
           <div>
-            <label className="label-text text-paper/60">Stock</label>
+            <label className="label-text text-ink-soft">Stock</label>
             <input
               type="number"
               min="0"
@@ -144,7 +144,7 @@ export default function ProductForm({ product, categories, onSubmit, onCancel, s
           </div>
 
           <div>
-            <label className="label-text text-paper/60">Colors (comma separated)</label>
+            <label className="label-text text-ink-soft">Colors (comma separated)</label>
             <input
               value={form.colors}
               onChange={(e) => setForm((f) => ({ ...f, colors: e.target.value }))}
@@ -153,7 +153,7 @@ export default function ProductForm({ product, categories, onSubmit, onCancel, s
             />
           </div>
           <div>
-            <label className="label-text text-paper/60">Sizes (comma separated)</label>
+            <label className="label-text text-ink-soft">Sizes (comma separated)</label>
             <input
               value={form.sizes}
               onChange={(e) => setForm((f) => ({ ...f, sizes: e.target.value }))}
@@ -163,7 +163,7 @@ export default function ProductForm({ product, categories, onSubmit, onCancel, s
           </div>
 
           <div className="sm:col-span-2">
-            <label className="label-text text-paper/60">SKU (optional)</label>
+            <label className="label-text text-ink-soft">SKU (optional)</label>
             <input
               value={form.sku}
               onChange={(e) => setForm((f) => ({ ...f, sku: e.target.value }))}
@@ -171,7 +171,7 @@ export default function ProductForm({ product, categories, onSubmit, onCancel, s
             />
           </div>
 
-          <label className="flex items-center gap-2 text-sm text-paper/80">
+          <label className="flex items-center gap-2 text-sm text-ink-soft">
             <input
               type="checkbox"
               checked={form.featured}
@@ -179,7 +179,7 @@ export default function ProductForm({ product, categories, onSubmit, onCancel, s
             />
             Show in featured swiper
           </label>
-          <label className="flex items-center gap-2 text-sm text-paper/80">
+          <label className="flex items-center gap-2 text-sm text-ink-soft">
             <input
               type="checkbox"
               checked={form.active}
@@ -190,7 +190,7 @@ export default function ProductForm({ product, categories, onSubmit, onCancel, s
         </div>
 
         <div className="mt-5">
-          <label className="label-text text-paper/60">Product photos</label>
+          <label className="label-text text-ink-soft">Product photos</label>
           <div className="flex flex-wrap gap-3">
             {existingImages.map((img) => (
               <div key={img.publicId} className="relative h-20 w-20">
@@ -216,7 +216,7 @@ export default function ProductForm({ product, categories, onSubmit, onCancel, s
                 </button>
               </div>
             ))}
-            <label className="flex h-20 w-20 cursor-pointer items-center justify-center rounded-lg border-2 border-dashed border-admin-border text-paper/40 hover:border-brand">
+            <label className="flex h-20 w-20 cursor-pointer items-center justify-center rounded-lg border-2 border-dashed border-admin-border text-ink-faint hover:border-brand">
               +
               <input type="file" accept="image/*" multiple onChange={handleFiles} className="hidden" />
             </label>
@@ -229,7 +229,7 @@ export default function ProductForm({ product, categories, onSubmit, onCancel, s
           <button
             type="button"
             onClick={onCancel}
-            className="btn-secondary bg-transparent text-paper border-admin-border hover:border-paper/40"
+            className="btn-secondary bg-transparent text-ink border-admin-border hover:border-ink-faint"
           >
             Cancel
           </button>

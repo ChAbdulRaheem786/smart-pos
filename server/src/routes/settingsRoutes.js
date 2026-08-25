@@ -64,7 +64,19 @@ router.put(
   adminAuth,
   asyncHandler(async (req, res) => {
     const settings = await getOrCreateSettings();
-    if (req.body.siteName !== undefined) settings.siteName = req.body.siteName;
+    const { siteName, heroTagline, aboutText, socialLinks } = req.body;
+
+    if (siteName !== undefined) settings.siteName = siteName;
+    if (heroTagline !== undefined) settings.heroTagline = heroTagline;
+    if (aboutText !== undefined) settings.aboutText = aboutText;
+    if (socialLinks !== undefined) {
+      settings.socialLinks = {
+        instagram: socialLinks.instagram || "",
+        tiktok: socialLinks.tiktok || "",
+        facebook: socialLinks.facebook || "",
+      };
+    }
+
     await settings.save();
     res.json(settings);
   })

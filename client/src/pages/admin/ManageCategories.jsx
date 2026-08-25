@@ -99,9 +99,9 @@ export default function ManageCategories() {
       {error && !showForm && <p className="mt-4 text-sm text-red-400">{error}</p>}
 
       {loading ? (
-        <p className="mt-6 text-paper/50">Loading…</p>
+        <p className="mt-6 text-ink-faint">Loading…</p>
       ) : categories.length === 0 ? (
-        <p className="mt-6 text-paper/50">No categories yet. Create your first one.</p>
+        <p className="mt-6 text-ink-faint">No categories yet. Create your first one.</p>
       ) : (
         <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {categories.map((cat) => (
@@ -110,7 +110,7 @@ export default function ManageCategories() {
                 {cat.image?.url && <img src={cat.image.url} alt={cat.name} className="h-full w-full object-cover" />}
               </div>
               <p className="mt-3 font-medium">{cat.name}</p>
-              {cat.description && <p className="mt-1 text-xs text-paper/50 line-clamp-2">{cat.description}</p>}
+              {cat.description && <p className="mt-1 text-xs text-ink-faint line-clamp-2">{cat.description}</p>}
               <div className="mt-3 flex gap-3 text-sm">
                 <button onClick={() => openEdit(cat)} className="text-brand hover:underline">Edit</button>
                 <button onClick={() => setDeleteTarget(cat)} className="text-red-400 hover:underline">Delete</button>
@@ -129,7 +129,7 @@ export default function ManageCategories() {
             <h3 className="font-display text-lg font-semibold">{form.id ? "Edit category" : "New category"}</h3>
 
             <div className="mt-4">
-              <label className="label-text text-paper/60">Name</label>
+              <label className="label-text text-ink-soft">Name</label>
               <input
                 value={form.name}
                 onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
@@ -139,7 +139,7 @@ export default function ManageCategories() {
             </div>
 
             <div className="mt-4">
-              <label className="label-text text-paper/60">Description (optional)</label>
+              <label className="label-text text-ink-soft">Description (optional)</label>
               <textarea
                 value={form.description}
                 onChange={(e) => setForm((f) => ({ ...f, description: e.target.value }))}
@@ -149,7 +149,7 @@ export default function ManageCategories() {
             </div>
 
             <div className="mt-4">
-              <label className="label-text text-paper/60">Sort order</label>
+              <label className="label-text text-ink-soft">Sort order</label>
               <input
                 type="number"
                 value={form.sortOrder}
@@ -159,11 +159,11 @@ export default function ManageCategories() {
             </div>
 
             <div className="mt-4">
-              <label className="label-text text-paper/60">Image</label>
+              <label className="label-text text-ink-soft">Image</label>
               {form.imagePreview && (
                 <img src={form.imagePreview} alt="" className="mb-2 h-24 w-24 rounded-lg object-cover" />
               )}
-              <input type="file" accept="image/*" onChange={handleFile} className="text-sm text-paper/70" />
+              <input type="file" accept="image/*" onChange={handleFile} className="text-sm text-ink-soft" />
             </div>
 
             {error && <p className="mt-3 text-sm text-red-400">{error}</p>}
@@ -172,7 +172,7 @@ export default function ManageCategories() {
               <button
                 type="button"
                 onClick={() => setShowForm(false)}
-                className="btn-secondary bg-transparent text-paper border-admin-border hover:border-paper/40"
+                className="btn-secondary bg-transparent text-ink border-admin-border hover:border-ink-faint"
               >
                 Cancel
               </button>

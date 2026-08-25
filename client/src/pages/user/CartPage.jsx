@@ -22,10 +22,10 @@ export default function CartPage() {
     <div className="mx-auto max-w-3xl px-5 py-10 pb-24">
       <h1 className="font-display text-2xl font-semibold">Your cart</h1>
 
-      <div className="mt-6 divide-y divide-line rounded-xl2 border border-line bg-white">
+      <div className="mt-6 divide-y divide-line rounded-xl2 border border-line bg-surface">
         {items.map((item, i) => (
           <div key={i} className="flex gap-4 p-4">
-            <div className="h-20 w-20 shrink-0 overflow-hidden rounded-lg bg-line/40">
+            <div className="h-20 w-20 shrink-0 overflow-hidden rounded-lg bg-surface2">
               {item.image && <img src={item.image} alt={item.name} className="h-full w-full object-cover" />}
             </div>
             <div className="flex flex-1 flex-col justify-between">
@@ -57,7 +57,7 @@ export default function CartPage() {
             <button
               onClick={() => removeItem(item)}
               aria-label="Remove item"
-              className="self-start text-ink-soft/50 hover:text-red-600"
+              className="self-start text-ink-faint hover:text-red-400"
             >
               ✕
             </button>
@@ -65,7 +65,7 @@ export default function CartPage() {
         ))}
       </div>
 
-      <div className="mt-6 flex items-center justify-between rounded-xl2 border border-line bg-white p-4">
+      <div className="mt-6 flex items-center justify-between rounded-xl2 border border-line bg-surface p-4">
         <span className="font-medium text-ink-soft">Total</span>
         <span className="price-tag text-base">{formatPrice(totalAmount)}</span>
       </div>

@@ -29,7 +29,7 @@ function parseListField(value) {
 router.get(
   "/",
   asyncHandler(async (req, res) => {
-    const { category, featured, search } = req.query;
+    const { category, featured, search, color, size, minPrice, maxPrice } = req.query;
     const Category = require("../models/Category");
 
     const filter = { active: true };
@@ -41,12 +41,43 @@ router.get(
     }
     if (featured === "true") filter.featured = true;
     if (search) filter.$text = { $search: search };
+    if (color) filter.colors = color;
+    if (size) filter.sizes = size;
+
+    if (minPrice || maxPrice) {
+      filter.price = {};
+      if (minPrice) filter.price.$gte = Number(minPrice);
+      if (maxPrice) filter.price.$lte = Number(maxPrice);
+    }
 
     const products = await Product.find(filter)
       .populate("category", "name slug")
       .sort({ createdAt: -1 });
 
     res.json(products);
+  })
+);
+
+// GET /api/products/meta/filters — public. Returns the distinct colors/sizes/price
+// range across all active products, used to build the storefront filter UI.
+router.get(
+  "/meta/filters",
+  asyncHandler(async (req, res) => {
+    const [colors, sizes, priceStats] = await Promise.all([
+      Product.distinct("colors", { active: true }),
+      Product.distinct("sizes", { active: true }),
+      Product.aggregate([
+        { $match: { active: true } },
+        { $group: { _id: null, min: { $min: "$price" }, max: { $max: "$price" } } },
+      ]),
+    ]);
+
+    res.json({
+      colors: colors.filter(Boolean).sort(),
+      sizes: sizes.filter(Boolean).sort(),
+      minPrice: priceStats[0]?.min ?? 0,
+      maxPrice: priceStats[0]?.max ?? 0,
+    });
   })
 );
 

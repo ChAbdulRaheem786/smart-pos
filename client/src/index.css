@@ -7,14 +7,18 @@
     scroll-behavior: smooth;
   }
   body {
-    @apply bg-paper text-ink font-body antialiased;
+    @apply bg-bg text-ink font-body antialiased;
   }
   h1, h2, h3, h4 {
     @apply font-display;
   }
   :focus-visible {
-    outline: 2px solid #0F8B77;
+    outline: 2px solid #1FE3B0;
     outline-offset: 2px;
+  }
+  ::selection {
+    background: #1FE3B0;
+    color: #0A0B10;
   }
 }
 
@@ -23,7 +27,7 @@
      price tags, with a punched notch on the left like a real tag. */
   .price-tag {
     @apply relative inline-flex items-center gap-1 font-mono text-sm font-semibold
-           bg-ink text-paper pl-4 pr-3 py-1 rounded-r-md;
+           bg-brand text-bg pl-4 pr-3 py-1 rounded-r-md;
   }
   .price-tag::before {
     content: "";
@@ -33,31 +37,44 @@
     transform: translateY(-50%);
     width: 12px;
     height: 12px;
-    background: #F7F4EC;
+    background: #0A0B10;
     border-radius: 50%;
   }
 
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 rounded-full bg-ink text-paper
-           px-5 py-2.5 font-medium text-sm transition-all hover:bg-brand-dark
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-brand text-bg
+           px-6 py-3 font-display font-semibold text-sm transition-all hover:bg-brand-dark
            active:scale-[0.98] disabled:opacity-50 disabled:pointer-events-none;
   }
   .btn-secondary {
     @apply inline-flex items-center justify-center gap-2 rounded-full border border-line
-           bg-white text-ink px-5 py-2.5 font-medium text-sm transition-colors
-           hover:border-ink disabled:opacity-50 disabled:pointer-events-none;
+           bg-transparent text-ink px-6 py-3 font-display font-medium text-sm transition-colors
+           hover:border-brand hover:text-brand disabled:opacity-50 disabled:pointer-events-none;
   }
   .input-field {
-    @apply w-full rounded-lg border border-line bg-white px-3.5 py-2.5 text-sm
-           text-ink placeholder:text-ink-soft/40 focus:border-brand focus:ring-1
+    @apply w-full rounded-lg border border-line bg-surface px-3.5 py-2.5 text-sm
+           text-ink placeholder:text-ink-faint focus:border-brand focus:ring-1
            focus:ring-brand outline-none transition-colors;
   }
   .label-text {
-    @apply block text-xs font-semibold uppercase tracking-wide text-ink-soft/70 mb-1.5;
+    @apply block text-xs font-semibold uppercase tracking-wide text-ink-faint mb-1.5;
   }
   .admin-input {
     @apply w-full rounded-lg border border-admin-border bg-admin-bg px-3.5 py-2.5 text-sm
-           text-paper placeholder:text-paper/30 focus:border-brand focus:ring-1
+           text-ink placeholder:text-ink-faint focus:border-brand focus:ring-1
            focus:ring-brand outline-none transition-colors;
+  }
+  .section-eyebrow {
+    @apply text-xs font-semibold uppercase tracking-[0.2em] text-brand;
+  }
+}
+
+@layer utilities {
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 }

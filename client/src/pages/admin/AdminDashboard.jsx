@@ -29,7 +29,7 @@ export default function AdminDashboard() {
     })();
   }, []);
 
-  if (!stats) return <p className="text-paper/50">Loading…</p>;
+  if (!stats) return <p className="text-ink-faint">Loading…</p>;
 
   const cards = [
     { label: "Categories", value: stats.categories, to: "/admin/categories" },
@@ -49,14 +49,14 @@ export default function AdminDashboard() {
             to={c.to}
             className="rounded-xl2 border border-admin-border bg-admin-surface p-5 hover:border-brand transition-colors"
           >
-            <p className="text-xs font-medium uppercase tracking-wide text-paper/50">{c.label}</p>
+            <p className="text-xs font-medium uppercase tracking-wide text-ink-faint">{c.label}</p>
             <p className="mt-2 font-display text-3xl font-semibold">{c.value}</p>
           </Link>
         ))}
       </div>
 
       <div className="mt-6 rounded-xl2 border border-admin-border bg-admin-surface p-5">
-        <p className="text-xs font-medium uppercase tracking-wide text-paper/50">
+        <p className="text-xs font-medium uppercase tracking-wide text-ink-faint">
           Revenue (confirmed + shipped + completed)
         </p>
         <p className="mt-2 font-display text-3xl font-semibold">{formatPrice(stats.revenue)}</p>
@@ -68,16 +68,16 @@ export default function AdminDashboard() {
           <Link to="/admin/orders" className="text-sm text-brand hover:underline">View all</Link>
         </div>
         <div className="mt-4 divide-y divide-admin-border">
-          {stats.recentOrders.length === 0 && <p className="py-4 text-sm text-paper/50">No orders yet.</p>}
+          {stats.recentOrders.length === 0 && <p className="py-4 text-sm text-ink-faint">No orders yet.</p>}
           {stats.recentOrders.map((o) => (
             <div key={o._id} className="flex items-center justify-between py-3 text-sm">
               <div>
                 <p className="font-medium">{o.customer.fullName}</p>
-                <p className="text-xs text-paper/50">{new Date(o.createdAt).toLocaleString()}</p>
+                <p className="text-xs text-ink-faint">{new Date(o.createdAt).toLocaleString()}</p>
               </div>
               <div className="text-right">
                 <p className="font-mono">{formatPrice(o.totalAmount)}</p>
-                <span className="text-xs capitalize text-paper/50">{o.status}</span>
+                <span className="text-xs capitalize text-ink-faint">{o.status}</span>
               </div>
             </div>
           ))}

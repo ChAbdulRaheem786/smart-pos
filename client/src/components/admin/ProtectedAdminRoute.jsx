@@ -6,7 +6,7 @@ export default function ProtectedAdminRoute() {
 
   if (checking) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-admin-bg text-paper/60">
+      <div className="flex min-h-screen items-center justify-center bg-admin-bg text-ink-soft">
         Checking session…
       </div>
     );

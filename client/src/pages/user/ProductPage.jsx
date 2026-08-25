@@ -77,14 +77,14 @@ export default function ProductPage() {
 
   return (
     <div className="mx-auto max-w-6xl px-5 py-10 pb-24">
-      <Link to="/" className="text-sm text-ink-soft hover:text-ink">
+      <Link to="/" className="text-sm text-ink-soft hover:text-brand">
         &larr; Back to shop
       </Link>
 
       <div className="mt-6 grid gap-10 lg:grid-cols-2">
         {/* Gallery */}
         <div>
-          <div className="aspect-square w-full overflow-hidden rounded-xl2 border border-line bg-line/40">
+          <div className="aspect-square w-full overflow-hidden rounded-xl2 border border-line bg-surface2">
             {product.images?.[activeImage] ? (
               <img
                 src={product.images[activeImage].url}
@@ -92,7 +92,7 @@ export default function ProductPage() {
                 className="h-full w-full object-cover"
               />
             ) : (
-              <div className="flex h-full w-full items-center justify-center text-ink-soft/40">
+              <div className="flex h-full w-full items-center justify-center text-ink-faint">
                 No image
               </div>
             )}
@@ -124,7 +124,7 @@ export default function ProductPage() {
           <div className="mt-4 flex items-center gap-3">
             <span className="price-tag text-base">{formatPrice(unitPrice)}</span>
             {hasDiscount && (
-              <span className="text-sm text-ink-soft/50 line-through">{formatPrice(product.price)}</span>
+              <span className="text-sm text-ink-faint line-through">{formatPrice(product.price)}</span>
             )}
           </div>
 
@@ -144,8 +144,8 @@ export default function ProductPage() {
                     onClick={() => setColor(c)}
                     className={`rounded-full border px-4 py-1.5 text-sm transition-colors ${
                       color === c
-                        ? "border-ink bg-ink text-paper"
-                        : "border-line bg-white text-ink hover:border-ink"
+                        ? "border-brand bg-brand text-bg"
+                        : "border-line bg-surface text-ink hover:border-brand"
                     }`}
                   >
                     {c}
@@ -165,8 +165,8 @@ export default function ProductPage() {
                     onClick={() => setSize(s)}
                     className={`rounded-full border px-4 py-1.5 text-sm transition-colors ${
                       size === s
-                        ? "border-ink bg-ink text-paper"
-                        : "border-line bg-white text-ink hover:border-ink"
+                        ? "border-brand bg-brand text-bg"
+                        : "border-line bg-surface text-ink hover:border-brand"
                     }`}
                   >
                     {s}

@@ -13,7 +13,7 @@ export default function AdminLayout() {
   const { logout } = useAdminAuth();
 
   return (
-    <div className="flex min-h-screen bg-admin-bg text-paper">
+    <div className="flex min-h-screen bg-admin-bg text-ink">
       <aside className="hidden w-60 shrink-0 flex-col border-r border-admin-border p-5 sm:flex">
         <div className="mb-8 flex items-center gap-2 px-1">
           <span className="flex h-8 w-8 items-center justify-center rounded-md bg-brand font-display text-sm font-bold text-white">
@@ -29,8 +29,8 @@ export default function AdminLayout() {
               className={({ isActive }) =>
                 `flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors ${
                   isActive
-                    ? "bg-admin-surface2 text-paper"
-                    : "text-paper/60 hover:bg-admin-surface hover:text-paper"
+                    ? "bg-admin-surface2 text-ink"
+                    : "text-ink-soft hover:bg-admin-surface hover:text-ink"
                 }`
               }
             >
@@ -41,7 +41,7 @@ export default function AdminLayout() {
         </nav>
         <button
           onClick={logout}
-          className="mt-4 rounded-lg px-3 py-2.5 text-left text-sm font-medium text-paper/50 hover:bg-admin-surface hover:text-red-400"
+          className="mt-4 rounded-lg px-3 py-2.5 text-left text-sm font-medium text-ink-faint hover:bg-admin-surface hover:text-red-400"
         >
           Log out
         </button>
@@ -50,7 +50,7 @@ export default function AdminLayout() {
       {/* Mobile top bar */}
       <div className="fixed inset-x-0 top-0 z-30 flex items-center justify-between border-b border-admin-border bg-admin-bg px-4 py-3 sm:hidden">
         <span className="font-display text-sm font-semibold">Admin panel</span>
-        <button onClick={logout} className="text-xs text-paper/50">Log out</button>
+        <button onClick={logout} className="text-xs text-ink-faint">Log out</button>
       </div>
 
       <div className="flex-1 pt-14 sm:pt-0">
@@ -60,7 +60,7 @@ export default function AdminLayout() {
               key={l.to}
               to={l.to}
               className={({ isActive }) =>
-                `shrink-0 text-xs font-medium ${isActive ? "text-brand" : "text-paper/50"}`
+                `shrink-0 text-xs font-medium ${isActive ? "text-brand" : "text-ink-faint"}`
               }
             >
               {l.label}

@@ -94,7 +94,7 @@ export default function CheckoutPage() {
 
       <form onSubmit={handleSubmit} className="mt-8 space-y-8">
         {/* Order summary */}
-        <div className="rounded-xl2 border border-line bg-white p-4">
+        <div className="rounded-xl2 border border-line bg-surface p-4">
           <p className="mb-3 text-sm font-semibold text-ink-soft">Order summary</p>
           <div className="space-y-2">
             {items.map((item, i) => (
@@ -193,19 +193,19 @@ export default function CheckoutPage() {
         {/* Payment proof */}
         <div>
           <p className="text-sm font-semibold text-ink-soft">Payment proof</p>
-          <p className="mt-1 text-xs text-ink-soft/70">
+          <p className="mt-1 text-xs text-ink-faint">
             Upload a screenshot or photo of your bank transfer / payment receipt.
           </p>
           <label
             htmlFor="paymentProof"
-            className="mt-3 flex cursor-pointer flex-col items-center justify-center rounded-xl2 border-2 border-dashed border-line bg-white p-6 text-center hover:border-brand"
+            className="mt-3 flex cursor-pointer flex-col items-center justify-center rounded-xl2 border-2 border-dashed border-line bg-surface p-6 text-center hover:border-brand"
           >
             {proofPreview ? (
               <img src={proofPreview} alt="Payment proof preview" className="max-h-52 rounded-lg object-contain" />
             ) : (
               <>
                 <span className="text-sm font-medium text-ink">Tap to upload an image</span>
-                <span className="mt-1 text-xs text-ink-soft/60">JPG, PNG, or WEBP — up to 8MB</span>
+                <span className="mt-1 text-xs text-ink-faint">JPG, PNG, or WEBP — up to 8MB</span>
               </>
             )}
           </label>
@@ -218,7 +218,7 @@ export default function CheckoutPage() {
           />
         </div>
 
-        {error && <p className="text-sm font-medium text-red-600">{error}</p>}
+        {error && <p className="text-sm font-medium text-red-400">{error}</p>}
 
         <button type="submit" disabled={submitting} className="btn-primary w-full">
           {submitting ? "Placing order…" : "Place order"}

@@ -58,14 +58,14 @@ export default function ManageOrders() {
       </div>
 
       {loading ? (
-        <p className="mt-6 text-paper/50">Loading…</p>
+        <p className="mt-6 text-ink-faint">Loading…</p>
       ) : orders.length === 0 ? (
-        <p className="mt-6 text-paper/50">No orders found.</p>
+        <p className="mt-6 text-ink-faint">No orders found.</p>
       ) : (
         <div className="mt-6 overflow-x-auto rounded-xl2 border border-admin-border">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-admin-border bg-admin-surface text-left text-paper/50">
+              <tr className="border-b border-admin-border bg-admin-surface text-left text-ink-faint">
                 <th className="px-4 py-3 font-medium">Customer</th>
                 <th className="px-4 py-3 font-medium">Items</th>
                 <th className="px-4 py-3 font-medium">Total</th>
@@ -79,11 +79,11 @@ export default function ManageOrders() {
                 <tr key={o._id} className="border-b border-admin-border bg-admin-surface/40 last:border-0">
                   <td className="px-4 py-3">
                     <p className="font-medium">{o.customer.fullName}</p>
-                    <p className="text-xs text-paper/50">{o.customer.phone}</p>
+                    <p className="text-xs text-ink-faint">{o.customer.phone}</p>
                   </td>
-                  <td className="px-4 py-3 text-paper/70">{o.items.length} item(s)</td>
+                  <td className="px-4 py-3 text-ink-soft">{o.items.length} item(s)</td>
                   <td className="px-4 py-3 font-mono">{formatPrice(o.totalAmount)}</td>
-                  <td className="px-4 py-3 text-paper/50">{new Date(o.createdAt).toLocaleDateString()}</td>
+                  <td className="px-4 py-3 text-ink-faint">{new Date(o.createdAt).toLocaleDateString()}</td>
                   <td className="px-4 py-3">
                     <span className={`rounded-full px-2.5 py-1 text-xs font-medium capitalize ${statusColors[o.status]}`}>
                       {o.status}
@@ -107,20 +107,20 @@ export default function ManageOrders() {
             <div className="flex items-start justify-between">
               <div>
                 <h3 className="font-display text-lg font-semibold">{activeOrder.customer.fullName}</h3>
-                <p className="text-sm text-paper/50">{new Date(activeOrder.createdAt).toLocaleString()}</p>
+                <p className="text-sm text-ink-faint">{new Date(activeOrder.createdAt).toLocaleString()}</p>
               </div>
-              <button onClick={() => setActiveOrder(null)} className="text-paper/50 hover:text-paper">✕</button>
+              <button onClick={() => setActiveOrder(null)} className="text-ink-faint hover:text-ink">✕</button>
             </div>
 
-            <div className="mt-4 space-y-1 text-sm text-paper/80">
-              <p><span className="text-paper/50">Phone:</span> {activeOrder.customer.phone}</p>
-              {activeOrder.customer.email && <p><span className="text-paper/50">Email:</span> {activeOrder.customer.email}</p>}
-              <p><span className="text-paper/50">Address:</span> {activeOrder.customer.address}, {activeOrder.customer.city}</p>
-              {activeOrder.customer.notes && <p><span className="text-paper/50">Notes:</span> {activeOrder.customer.notes}</p>}
+            <div className="mt-4 space-y-1 text-sm text-ink-soft">
+              <p><span className="text-ink-faint">Phone:</span> {activeOrder.customer.phone}</p>
+              {activeOrder.customer.email && <p><span className="text-ink-faint">Email:</span> {activeOrder.customer.email}</p>}
+              <p><span className="text-ink-faint">Address:</span> {activeOrder.customer.address}, {activeOrder.customer.city}</p>
+              {activeOrder.customer.notes && <p><span className="text-ink-faint">Notes:</span> {activeOrder.customer.notes}</p>}
             </div>
 
             <div className="mt-5">
-              <p className="text-xs font-semibold uppercase tracking-wide text-paper/50">Items</p>
+              <p className="text-xs font-semibold uppercase tracking-wide text-ink-faint">Items</p>
               <div className="mt-2 space-y-2">
                 {activeOrder.items.map((item, i) => (
                   <div key={i} className="flex items-center justify-between text-sm">
@@ -140,7 +140,7 @@ export default function ManageOrders() {
             </div>
 
             <div className="mt-5">
-              <p className="text-xs font-semibold uppercase tracking-wide text-paper/50">Payment proof</p>
+              <p className="text-xs font-semibold uppercase tracking-wide text-ink-faint">Payment proof</p>
               <a href={activeOrder.paymentProof.url} target="_blank" rel="noopener noreferrer">
                 <img
                   src={activeOrder.paymentProof.url}
@@ -151,7 +151,7 @@ export default function ManageOrders() {
             </div>
 
             <div className="mt-5">
-              <p className="label-text text-paper/60">Update status</p>
+              <p className="label-text text-ink-soft">Update status</p>
               <select
                 value={activeOrder.status}
                 onChange={(e) => updateStatus(activeOrder, e.target.value)}
@@ -169,7 +169,7 @@ export default function ManageOrders() {
               </button>
               <button
                 onClick={() => setActiveOrder(null)}
-                className="btn-secondary bg-transparent text-paper border-admin-border hover:border-paper/40"
+                className="btn-secondary bg-transparent text-ink border-admin-border hover:border-ink-faint"
               >
                 Close
               </button>
