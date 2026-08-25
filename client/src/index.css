@@ -1,0 +1,63 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-paper text-ink font-body antialiased;
+  }
+  h1, h2, h3, h4 {
+    @apply font-display;
+  }
+  :focus-visible {
+    outline: 2px solid #0F8B77;
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  /* Signature element: a physical "price ticket" chip — a nod to point-of-sale
+     price tags, with a punched notch on the left like a real tag. */
+  .price-tag {
+    @apply relative inline-flex items-center gap-1 font-mono text-sm font-semibold
+           bg-ink text-paper pl-4 pr-3 py-1 rounded-r-md;
+  }
+  .price-tag::before {
+    content: "";
+    position: absolute;
+    left: -6px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 12px;
+    height: 12px;
+    background: #F7F4EC;
+    border-radius: 50%;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-ink text-paper
+           px-5 py-2.5 font-medium text-sm transition-all hover:bg-brand-dark
+           active:scale-[0.98] disabled:opacity-50 disabled:pointer-events-none;
+  }
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-line
+           bg-white text-ink px-5 py-2.5 font-medium text-sm transition-colors
+           hover:border-ink disabled:opacity-50 disabled:pointer-events-none;
+  }
+  .input-field {
+    @apply w-full rounded-lg border border-line bg-white px-3.5 py-2.5 text-sm
+           text-ink placeholder:text-ink-soft/40 focus:border-brand focus:ring-1
+           focus:ring-brand outline-none transition-colors;
+  }
+  .label-text {
+    @apply block text-xs font-semibold uppercase tracking-wide text-ink-soft/70 mb-1.5;
+  }
+  .admin-input {
+    @apply w-full rounded-lg border border-admin-border bg-admin-bg px-3.5 py-2.5 text-sm
+           text-paper placeholder:text-paper/30 focus:border-brand focus:ring-1
+           focus:ring-brand outline-none transition-colors;
+  }
+}
