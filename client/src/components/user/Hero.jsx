@@ -26,11 +26,13 @@ export default function Hero() {
               src={b.url}
               alt=""
               className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ${
-                i === index ? "opacity-25" : "opacity-0"
+                i === index ? "opacity-70" : "opacity-0"
               }`}
             />
           ))}
-          <div className="absolute inset-0 bg-gradient-to-t from-bg via-bg/80 to-bg/40" />
+          {/* Light overall tint so text stays legible, plus a soft bottom fade for depth */}
+          <div className="absolute inset-0 bg-bg/25" />
+          <div className="absolute inset-0 bg-gradient-to-t from-bg/70 via-transparent to-transparent" />
         </div>
       )}
 
