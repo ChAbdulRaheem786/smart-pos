@@ -1,17 +1,35 @@
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { useSettings } from "../../context/SettingsContext";
 
 export default function Hero() {
   const { settings } = useSettings();
-  const banner = settings?.headerBanners?.[0];
+  const banners = settings?.headerBanners || [];
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    if (banners.length < 2) return;
+    const id = setInterval(() => setIndex((i) => (i + 1) % banners.length), 5000);
+    return () => clearInterval(id);
+  }, [banners.length]);
 
   return (
     <section className="relative overflow-hidden border-b border-line">
-      {/* Ambient glow + optional banner image backdrop */}
+      {/* Ambient glow, always present */}
       <div className="absolute inset-0 bg-radial-glow" />
-      {banner?.url && (
+
+      {/* Rotating banner backdrop */}
+      {banners.length > 0 && (
         <div className="absolute inset-0">
-          <img src={banner.url} alt="" className="h-full w-full object-cover opacity-25" />
+          {banners.map((b, i) => (
+            <img
+              key={b._id || i}
+              src={b.url}
+              alt=""
+              className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ${
+                i === index ? "opacity-25" : "opacity-0"
+              }`}
+            />
+          ))}
           <div className="absolute inset-0 bg-gradient-to-t from-bg via-bg/80 to-bg/40" />
         </div>
       )}
@@ -34,6 +52,21 @@ export default function Hero() {
           </a>
         </div>
       </div>
+
+      {banners.length > 1 && (
+        <div className="absolute bottom-5 left-1/2 z-10 flex -translate-x-1/2 gap-1.5">
+          {banners.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setIndex(i)}
+              aria-label={`Go to slide ${i + 1}`}
+              className={`h-1.5 rounded-full transition-all ${
+                i === index ? "w-6 bg-brand" : "w-1.5 bg-ink-faint"
+              }`}
+            />
+          ))}
+        </div>
+      )}
     </section>
   );
 }

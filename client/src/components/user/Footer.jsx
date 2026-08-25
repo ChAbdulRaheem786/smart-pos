@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
 import { useSettings } from "../../context/SettingsContext";
+import { useGoToCategory } from "../../hooks/useGoToCategory";
 
 export default function Footer() {
   const { settings, categories } = useSettings();
+  const goToCategory = useGoToCategory();
   const social = settings?.socialLinks || {};
   const hasSocial = social.instagram || social.tiktok || social.facebook;
 
@@ -28,9 +30,9 @@ export default function Footer() {
               <ul className="mt-4 space-y-2.5 text-sm text-ink-soft">
                 {categories.slice(0, 6).map((c) => (
                   <li key={c._id}>
-                    <Link to={`/?category=${c.slug}#products`} className="hover:text-brand transition-colors">
+                    <button onClick={() => goToCategory(c.slug)} className="hover:text-brand transition-colors">
                       {c.name}
-                    </Link>
+                    </button>
                   </li>
                 ))}
               </ul>

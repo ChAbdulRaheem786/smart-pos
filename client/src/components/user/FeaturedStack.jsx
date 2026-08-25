@@ -9,7 +9,7 @@ const STACK_SIZE = 3; // how many cards are visibly stacked behind the front car
 export default function FeaturedStack() {
   const [products, setProducts] = useState([]);
   const [order, setOrder] = useState([]); // indices into `products`, front card = order[0]
-  const [exitDirection, setExitDirection] = useState(1);
+  const [flyingCard, setFlyingCard] = useState(null); // { key, product, direction }
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -24,12 +24,15 @@ export default function FeaturedStack() {
 
   if (loading || products.length === 0) return null;
 
-  const swipeAway = () => {
-    setExitDirection(Math.random() > 0.5 ? 1 : -1);
-    setOrder((prev) => {
-      const [front, ...rest] = prev;
-      return [...rest, front]; // cycle the front card to the back of the stack
-    });
+  // direction: 1 = swipe right, -1 = swipe left. The card currently on top flies
+  // off in that direction while the stack underneath instantly reorders, so the
+  // next card is already sliding into the front position as the old one exits.
+  const triggerSwipe = (direction) => {
+    if (order.length === 0) return;
+    const frontIdx = order[0];
+    setFlyingCard({ key: `${frontIdx}-${Date.now()}`, product: products[frontIdx], direction });
+    setOrder((prev) => [...prev.slice(1), prev[0]]);
+    setTimeout(() => setFlyingCard(null), 400);
   };
 
   const visible = order.slice(0, Math.min(STACK_SIZE, products.length));
@@ -40,51 +43,53 @@ export default function FeaturedStack() {
         <div className="text-center">
           <span className="section-eyebrow">Featured</span>
           <h2 className="mt-2 font-display text-3xl font-bold sm:text-4xl">Hand-picked for you</h2>
-          <p className="mt-2 text-ink-soft">Tap a card to see what's next.</p>
+          <p className="mt-2 text-ink-soft">Tap or drag a card to see what's next.</p>
         </div>
 
         <div className="relative mx-auto mt-12 h-[420px] w-full max-w-sm sm:h-[460px]">
-          <AnimatePresence initial={false}>
-            {visible
-              .map((idx, stackPos) => {
-                const product = products[idx];
-                const isFront = stackPos === 0;
-                return (
-                  <motion.div
-                    key={product._id}
-                    className="absolute inset-0"
-                    style={{ zIndex: STACK_SIZE - stackPos }}
-                    initial={false}
-                    animate={{
-                      scale: 1 - stackPos * 0.05,
-                      y: stackPos * 14,
-                      opacity: 1 - stackPos * 0.15,
-                    }}
-                    exit={{
-                      x: exitDirection * 400,
-                      rotate: exitDirection * 18,
-                      opacity: 0,
-                      transition: { duration: 0.35, ease: "easeIn" },
-                    }}
-                    transition={{ type: "spring", stiffness: 260, damping: 24 }}
-                    drag={isFront ? "x" : false}
-                    dragConstraints={{ left: 0, right: 0 }}
-                    dragElastic={0.6}
-                    onDragEnd={(e, info) => {
-                      if (Math.abs(info.offset.x) > 100) {
-                        setExitDirection(info.offset.x > 0 ? 1 : -1);
-                        setOrder((prev) => {
-                          const [front, ...rest] = prev;
-                          return [...rest, front];
-                        });
-                      }
-                    }}
-                  >
-                    <FeaturedCard product={product} onSwipe={isFront ? swipeAway : undefined} />
-                  </motion.div>
-                );
-              })
-              .reverse()}
+          {visible.map((idx, stackPos) => {
+            const product = products[idx];
+            const isFront = stackPos === 0;
+            return (
+              <motion.div
+                key={product._id}
+                className="absolute inset-0"
+                style={{ zIndex: STACK_SIZE - stackPos }}
+                animate={{
+                  scale: 1 - stackPos * 0.05,
+                  y: stackPos * 14,
+                  opacity: 1 - stackPos * 0.15,
+                }}
+                transition={{ type: "spring", stiffness: 260, damping: 24 }}
+                drag={isFront ? "x" : false}
+                dragConstraints={{ left: 0, right: 0 }}
+                dragElastic={0.6}
+                onDragEnd={(e, info) => {
+                  if (Math.abs(info.offset.x) > 100) {
+                    triggerSwipe(info.offset.x > 0 ? 1 : -1);
+                  }
+                }}
+              >
+                <FeaturedCard product={product} onSwipe={isFront ? () => triggerSwipe(1) : undefined} />
+              </motion.div>
+            );
+          })}
+
+          {/* Ghost card that plays the fly-away animation, decoupled from the
+              stack above so the swipe always plays regardless of stack size. */}
+          <AnimatePresence>
+            {flyingCard && (
+              <motion.div
+                key={flyingCard.key}
+                className="absolute inset-0 pointer-events-none"
+                style={{ zIndex: STACK_SIZE + 1 }}
+                initial={{ x: 0, rotate: 0, opacity: 1, scale: 1 }}
+                animate={{ x: flyingCard.direction * 420, rotate: flyingCard.direction * 20, opacity: 0 }}
+                transition={{ duration: 0.35, ease: "easeIn" }}
+              >
+                <FeaturedCard product={flyingCard.product} />
+              </motion.div>
+            )}
           </AnimatePresence>
         </div>
       </div>

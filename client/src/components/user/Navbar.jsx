@@ -1,17 +1,18 @@
 import { useState } from "react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useCart } from "../../context/CartContext";
 import { useSettings } from "../../context/SettingsContext";
+import { useGoToCategory } from "../../hooks/useGoToCategory";
 
 export default function Navbar() {
   const { totalItems } = useCart();
   const { settings, categories } = useSettings();
   const [menuOpen, setMenuOpen] = useState(false);
-  const navigate = useNavigate();
+  const goToCategory = useGoToCategory();
 
-  const goToCategory = (slug) => {
+  const handleCategoryClick = (slug) => {
     setMenuOpen(false);
-    navigate(`/?category=${slug}#products`);
+    goToCategory(slug);
   };
 
   return (
@@ -33,7 +34,7 @@ export default function Navbar() {
           {categories.map((cat) => (
             <button
               key={cat._id}
-              onClick={() => goToCategory(cat.slug)}
+              onClick={() => handleCategoryClick(cat.slug)}
               className="hover:text-ink transition-colors"
             >
               {cat.name}
@@ -77,7 +78,7 @@ export default function Navbar() {
           <div className="flex flex-col gap-3 text-sm font-medium text-ink-soft">
             <Link to="/" onClick={() => setMenuOpen(false)} className="hover:text-ink">Home</Link>
             {categories.map((cat) => (
-              <button key={cat._id} onClick={() => goToCategory(cat.slug)} className="text-left hover:text-ink">
+              <button key={cat._id} onClick={() => handleCategoryClick(cat.slug)} className="text-left hover:text-ink">
                 {cat.name}
               </button>
             ))}
